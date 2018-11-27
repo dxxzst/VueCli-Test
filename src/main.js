@@ -14,8 +14,8 @@ import '@/permission'; // permission control
 Vue.use(ElementUI);
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App)
+    el: '#app',
+    router,
+    store,
+    render: h => h(App)
 });
