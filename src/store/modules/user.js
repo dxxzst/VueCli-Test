@@ -28,7 +28,7 @@ const user = {
             const accountId = userInfo.accountId.trim();
             return new Promise((resolve, reject) => {
                 login(accountId, userInfo.password).then(response => {
-                    const token = response.headers['Authorization'];
+                    const token = response.headers['authorization'];
                     setToken(token);
                     commit('SET_TOKEN', token);
                     resolve();

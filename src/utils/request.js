@@ -33,7 +33,7 @@ service.interceptors.response.use(response => {
             });
         });
     } else {
-        return response.data;
+        return response;
     }
 }, error => {
     Message({
