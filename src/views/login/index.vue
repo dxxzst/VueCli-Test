@@ -9,7 +9,7 @@
             <el-form-item prop="password">
                 <span class="svg-container"><svg-icon icon-class="password"/></span>
                 <el-input :type="pwdType" v-model="loginForm.password" name="password" auto-complete="on" placeholder="password" @keyup.enter.native="handleLogin"/>
-                <span class="show-pwd" @click="showPwd"><svg-icon icon-class="eye"/></span>
+                <span class="show-pwd" @click="showPwd"><svg-icon :icon-class="eyeType"/></span>
             </el-form-item>
             <el-form-item>
                 <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">登陆</el-button>
@@ -44,7 +44,8 @@
                 },
                 loading: false,
                 pwdType: "password",
-                redirect: undefined
+                redirect: undefined,
+                eyeType:'eye-close'
             };
         },
         watch: {
@@ -59,8 +60,10 @@
             showPwd() {
                 if (this.pwdType === "password") {
                     this.pwdType = "";
+                    this.eyeType = 'eye-open';
                 } else {
                     this.pwdType = "password";
+                    this.eyeType = 'eye-close'
                 }
             },
             handleLogin() {
@@ -77,7 +80,6 @@
                                 this.loading = false;
                             });
                     } else {
-                        console.log("error submit!!");
                         return false;
                     }
                 });
@@ -98,9 +100,9 @@
             width: 85%;
             input {
                 background: transparent;
-                border: 0px;
+                border: 0;
                 -webkit-appearance: none;
-                border-radius: 0px;
+                border-radius: 0;
                 padding: 12px 5px 12px 15px;
                 color: $light_gray;
                 height: 47px;
@@ -156,7 +158,7 @@
         }
         .title {
             font-size: 26px;
-            font-weight: 400;
+            /*font-weight: 400;*/
             color: $light_gray;
             margin: 0px auto 40px auto;
             text-align: center;
