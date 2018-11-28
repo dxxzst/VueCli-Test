@@ -45,7 +45,7 @@
                 loading: false,
                 pwdType: "password",
                 redirect: undefined,
-                eyeType:'eye-close'
+                eyeType: 'eye-close'
             };
         },
         watch: {

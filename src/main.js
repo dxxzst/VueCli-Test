@@ -12,7 +12,7 @@ import '@/icons/index'; // icon
 import '@/permission'; // permission control
 
 Vue.use(ElementUI);
-console.log(process.env.VUE_APP_BASE_API);
+
 new Vue({
     el: '#app',
     router,
