@@ -23,7 +23,7 @@
     import {mapGetters} from 'vuex';
     import Breadcrumb from '@/components/Breadcrumb';
     import Hamburger from '@/components/Hamburger';
-    import defaultAvatar from '@/assets/default/avatar.gif';
+    import defaultAvatar from '@/assets/default/avatar.gif'; //默认头像
 
     export default {
         data() {
