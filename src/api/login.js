@@ -11,10 +11,9 @@ export function login(accountId, password) {
     });
 }
 
-export function getInfo(token) {
+export function getInfo() {
     return request({
         url: '/uaa/api/v1/uaa/users/info',
-        method: 'get',
-        params: {token}
+        method: 'get'
     });
 }
