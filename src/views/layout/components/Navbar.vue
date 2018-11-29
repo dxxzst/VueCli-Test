@@ -4,7 +4,7 @@
         <breadcrumb/>
         <el-dropdown class="avatar-container" trigger="click">
             <div class="avatar-wrapper">
-                <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+                <img :src="avatar ? avatar : defaultAvatar + '?imageView2/1/w/80/h/80'" class="user-avatar">
                 <i class="el-icon-caret-bottom"></i>
             </div>
             <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -23,8 +23,14 @@
     import {mapGetters} from 'vuex';
     import Breadcrumb from '@/components/Breadcrumb';
     import Hamburger from '@/components/Hamburger';
+    import defaultAvatar from '@/assets/default/avatar.gif';
 
     export default {
+        data() {
+            return {
+                defaultAvatar //配置默认头像
+            }
+        },
         components: {
             Breadcrumb,
             Hamburger
@@ -41,7 +47,7 @@
             },
             logout() {
                 this.$store.dispatch('FedLogOut').then(() => {
-                    location.reload() // 为了重新实例化vue-router对象 避免bug
+                    location.reload(); // 为了重新实例化vue-router对象 避免bug
                 })
             }
         }
