@@ -40,18 +40,20 @@ service.interceptors.response.use(response => {
 }, error => {
     const response = error.response;
     const type = response.headers['unauthorization-type'];
-    const status = response.status;
+    let message = error.message;
+
     if (type && type === 'expired') {
-        MessageBox.confirm('登录超时，点击重新登录', '提示', {
-            confirmButtonText: '重新登录',
-            type: 'warning'
-        }).then(() => {
-            store.dispatch('FedLogOut').then(() => {
-                location.reload(); // 为了重新实例化vue-router对象 避免bug
-            });
-        });
+        message = '登录超时，请重新登录';
+        // MessageBox.confirm('登录超时，点击重新登录', '提示', {
+        //     confirmButtonText: '重新登录',
+        //     type: 'warning'
+        // }).then(() => {
+        //     store.dispatch('FedLogOut').then(() => {
+        //         location.reload(); // 为了重新实例化vue-router对象 避免bug
+        //     });
+        // });
     } else {
-        let message = error.message;
+        const status = response.status;
         switch (status) {
             case 401:
                 message = '错误401，抱歉，请求需要授权';
@@ -65,12 +67,12 @@ service.interceptors.response.use(response => {
             default:
                 break;
         }
-        Message({
-            message,
-            type: 'error',
-            duration: 5 * 1000
-        });
     }
+    Message({
+        message,
+        type: 'error',
+        duration: 5 * 1000
+    });
     return Promise.reject(error);
 });
 

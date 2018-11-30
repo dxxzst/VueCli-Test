@@ -47,6 +47,7 @@ const user = {
                     } else {
                         reject('getInfo: roles must be a non-null array !');
                     }
+                    //commit('SET_ROLES', ['SuperAdmin']);
                     commit('SET_NAME', data.userName);
                     commit('SET_AVATAR', data.photoPath);
                     resolve(response);
