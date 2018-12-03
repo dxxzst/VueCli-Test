@@ -23,6 +23,8 @@
 </template>
 
 <script>
+    import {Message} from 'element-ui';
+
     export default {
         name: "Login",
         data() {
@@ -45,7 +47,8 @@
                 loading: false,
                 pwdType: "password",
                 redirect: undefined,
-                eyeType: 'eye-close'
+                eyeType: 'eye-close',
+                tCaptchaSrc: "https://ssl.captcha.qq.com/TCaptcha.js"
             };
         },
         watch: {
@@ -66,7 +69,7 @@
                     this.eyeType = 'eye-close'
                 }
             },
-            handleLogin() {
+            loginRequest() {
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
                         this.loading = true;
@@ -76,14 +79,40 @@
                                 this.loading = false;
                                 this.$router.push({path: this.redirect || "/"});
                             })
-                            .catch(() => {
+                            .catch((error) => {
+                                if (error.response.status === 401) {
+                                    Message.closeAll();
+                                    Message({
+                                        message: "用户名或密码错误，请重试",
+                                        type: 'error',
+                                        center: true,
+                                        duration: 5 * 1000
+                                    });
+                                }
                                 this.loading = false;
                             });
                     } else {
                         return false;
                     }
                 });
+            },
+            handleLogin() {
+                var that = this;
+                var captcha1 = new TencentCaptcha('2054066368', function (res) {
+                    if (res.ret === 0) {
+                        that.loginRequest();
+                    }
+                });
+                captcha1.show();
+            },
+            createScript(src) {
+                var oScript = document.createElement('script');
+                oScript.src = src;
+                document.getElementsByTagName('body')[0].appendChild(oScript);
             }
+        },
+        created: function () {
+            this.createScript(this.tCaptchaSrc);
         }
     };
 </script>
