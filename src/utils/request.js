@@ -46,6 +46,10 @@ service.interceptors.response.use(response => {
         //message = '登录超时，请重新登录';
         MessageBox.confirm('登录超时，点击重新登录', '提示', {
             confirmButtonText: '重新登录',
+            showCancelButton: false,
+            closeOnClickModal: false,
+            showClose: false,
+            closeOnPressEscape: false,
             type: 'warning'
         }).then(() => {
             store.dispatch('FedLogOut').then(() => {
