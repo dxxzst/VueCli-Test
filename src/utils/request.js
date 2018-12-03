@@ -43,15 +43,15 @@ service.interceptors.response.use(response => {
     let message = error.message;
 
     if (type && type === 'expired') {
-        message = '登录超时，请重新登录';
-        // MessageBox.confirm('登录超时，点击重新登录', '提示', {
-        //     confirmButtonText: '重新登录',
-        //     type: 'warning'
-        // }).then(() => {
-        //     store.dispatch('FedLogOut').then(() => {
-        //         location.reload(); // 为了重新实例化vue-router对象 避免bug
-        //     });
-        // });
+        //message = '登录超时，请重新登录';
+        MessageBox.confirm('登录超时，点击重新登录', '提示', {
+            confirmButtonText: '重新登录',
+            type: 'warning'
+        }).then(() => {
+            store.dispatch('FedLogOut').then(() => {
+                location.reload(); // 为了重新实例化vue-router对象 避免bug
+            });
+        });
     } else {
         const status = response.status;
         switch (status) {
