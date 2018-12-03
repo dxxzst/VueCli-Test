@@ -97,6 +97,11 @@
                 });
             },
             handleLogin() {
+                //开发环境不显示
+                if (process.env.VUE_APP_ENVIRONMENT === 'DEVELOPMENT') {
+                    this.loginRequest();
+                    return;
+                }
                 var that = this;
                 var captcha1 = new TencentCaptcha('2054066368', function (res) {
                     if (res.ret === 0) {
