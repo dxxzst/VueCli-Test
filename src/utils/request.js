@@ -43,7 +43,6 @@ service.interceptors.response.use(response => {
     let message = error.message;
 
     if (type && type === 'expired') {
-        Message.closeAll();  //首先关闭原来的提示;
         MessageBox.confirm('登录超时，点击重新登录', '提示', {
             confirmButtonText: '重新登录',
             showCancelButton: false,
@@ -71,12 +70,12 @@ service.interceptors.response.use(response => {
             default:
                 break;
         }
+        Message({
+            message,
+            type: 'error',
+            duration: 5 * 1000
+        });
     }
-    Message({
-        message,
-        type: 'error',
-        duration: 5 * 1000
-    });
     return Promise.reject(error);
 });
 
