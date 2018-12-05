@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+let _import = require('./_import_' + process.env.VUE_APP_ENVIRONMENT);
 
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
@@ -24,12 +25,12 @@ import Layout from '../views/layout/Layout';
 export const constantRouterMap = [
     {
         path: '/login',
-        component: () => import('@/views/login/index'),
+        component: _import('login/index'),
         hidden: true
     },
     {
         path: '/404',
-        component: () => import('@/views/404'),
+        component: _import('404'),
         hidden: true
     },
     {
@@ -40,7 +41,7 @@ export const constantRouterMap = [
         hidden: true,
         children: [{
             path: 'dashboard',
-            component: () => import('@/views/dashboard/index')
+            component: _import('dashboard/index')
         }]
     }
 ];
@@ -59,7 +60,7 @@ export const asyncRouterMap = [
             {
                 path: 'table',
                 name: 'Table',
-                component: () => import('@/views/table/index'),
+                component: _import('table/index'),
                 meta: {
                     title: 'Table',
                     icon: 'table'
@@ -68,7 +69,7 @@ export const asyncRouterMap = [
             {
                 path: 'tree',
                 name: 'Tree',
-                component: () => import('@/views/tree/index'),
+                component: _import('tree/index'),
                 meta: {
                     title: 'Tree',
                     icon: 'tree',
@@ -84,7 +85,7 @@ export const asyncRouterMap = [
             {
                 path: 'index',
                 name: 'Form',
-                component: () => import('@/views/form/index'),
+                component: _import('form/index'),
                 meta: {
                     title: 'Form',
                     icon: 'form'
@@ -104,7 +105,7 @@ export const asyncRouterMap = [
         children: [
             {
                 path: 'menu1',
-                component: () => import('@/views/nested/menu1/index'), // Parent router-view
+                component: _import('nested/menu1/index'), // Parent router-view
                 name: 'Menu1',
                 meta: {
                     title: 'Menu1'
@@ -112,7 +113,7 @@ export const asyncRouterMap = [
                 children: [
                     {
                         path: 'menu1-1',
-                        component: () => import('@/views/nested/menu1/menu1-1'),
+                        component: _import('nested/menu1/menu1-1/index'),
                         name: 'Menu1-1',
                         meta: {
                             title: 'Menu1-1'
@@ -120,14 +121,14 @@ export const asyncRouterMap = [
                     },
                     {
                         path: 'menu1-2',
-                        component: () => import('@/views/nested/menu1/menu1-2'),
+                        component: _import('nested/menu1/menu1-2/index'),
                         name: 'Menu1-2',
                         meta: {
                             title: 'Menu1-2'
                         },
                         children: [{
                             path: 'menu1-2-1',
-                            component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+                            component: _import('nested/menu1/menu1-2/menu1-2-1/index'),
                             name: 'Menu1-2-1',
                             meta: {
                                 title: 'Menu1-2-1'
@@ -135,7 +136,7 @@ export const asyncRouterMap = [
                         },
                             {
                                 path: 'menu1-2-2',
-                                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+                                component: _import('nested/menu1/menu1-2/menu1-2-2/index'),
                                 name: 'Menu1-2-2',
                                 meta: {
                                     title: 'Menu1-2-2'
@@ -145,7 +146,7 @@ export const asyncRouterMap = [
                     },
                     {
                         path: 'menu1-3',
-                        component: () => import('@/views/nested/menu1/menu1-3'),
+                        component: _import('nested/menu1/menu1-3/index'),
                         name: 'Menu1-3',
                         meta: {
                             title: 'Menu1-3'
@@ -155,7 +156,7 @@ export const asyncRouterMap = [
             },
             {
                 path: 'menu2',
-                component: () => import('@/views/nested/menu2/index'),
+                component: _import('nested/menu2/index'),
                 meta: {
                     title: 'menu2'
                 }

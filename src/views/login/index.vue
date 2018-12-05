@@ -103,6 +103,7 @@
                     return;
                 }
                 var that = this;
+                // eslint-disable-next-line
                 var captcha1 = new TencentCaptcha('2054066368', function (res) {
                     if (res.ret === 0) {
                         that.loginRequest();
@@ -117,7 +118,10 @@
             }
         },
         created: function () {
-            this.createScript(this.tCaptchaSrc);
+            //开发环境不显示
+            if (process.env.VUE_APP_ENVIRONMENT === 'PRODUCTION') {
+                this.createScript(this.tCaptchaSrc);
+            }
         }
     };
 </script>
