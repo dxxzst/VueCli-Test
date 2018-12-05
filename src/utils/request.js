@@ -43,7 +43,7 @@ service.interceptors.response.use(response => {
     let message = error.message;
 
     if (type && type === 'expired') {
-        //message = '登录超时，请重新登录';
+        Message.closeAll();  //首先关闭原来的提示;
         MessageBox.confirm('登录超时，点击重新登录', '提示', {
             confirmButtonText: '重新登录',
             showCancelButton: false,
