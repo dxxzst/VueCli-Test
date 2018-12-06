@@ -4,7 +4,7 @@
             <div :show-timeout="2000" class="avatar-wrapper" v-if="sidebar.opened">
                 <el-row>
                     <el-col :span="24">
-                        <img :src="avatar ? avatar : defaultAvatar + '?imageView2/1/w/80/h/80'" class="user-avatar" alt="头像">
+                        <img :src="avatar ? avatar : defaultAvatar + '?imageView2/1/w/80/h/80'" alt="头像" class="user-avatar">
                     </el-col>
                     <el-col :span="24" class="user-name"><span> 欢迎 {{ name }}</span></el-col>
                 </el-row>
