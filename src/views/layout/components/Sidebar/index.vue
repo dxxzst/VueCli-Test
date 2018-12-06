@@ -1,15 +1,15 @@
 <template>
     <el-scrollbar wrap-class="scrollbar-wrapper">
-        <el-menu :show-timeout="200" :default-active="$route.path" :collapse="isCollapse" mode="vertical" background-color="#304156" text-color="#bfcbd9" active-text-color="#409EFF">
+        <el-menu :collapse="isCollapse" :default-active="$route.path" :show-timeout="200" active-text-color="#409EFF" background-color="#304156" mode="vertical" text-color="#bfcbd9">
             <div :show-timeout="2000" class="avatar-wrapper" v-if="sidebar.opened">
                 <el-row>
                     <el-col :span="24">
-                        <img :src="avatar ? avatar : defaultAvatar + '?imageView2/1/w/80/h/80'" class="user-avatar">
+                        <img :src="avatar ? avatar : defaultAvatar + '?imageView2/1/w/80/h/80'" class="user-avatar" alt="头像">
                     </el-col>
                     <el-col :span="24" class="user-name"><span> 欢迎 {{ name }}</span></el-col>
                 </el-row>
             </div>
-            <sidebar-item v-for="route in permission_routers" :key="route.path" :item="route" :base-path="route.path"/>
+            <sidebar-item :base-path="route.path" :item="route" :key="route.path" v-for="route in permission_routers"/>
         </el-menu>
     </el-scrollbar>
 </template>
@@ -45,12 +45,14 @@
         padding: 25px;
         display: block;
         position: relative;
+
         .user-name {
             color: white;
             font-weight: 600;
             margin-top: 8px;
             font-size: 13px;
         }
+
         .user-avatar {
             width: 64px;
             height: 64px;
