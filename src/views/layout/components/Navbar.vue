@@ -3,16 +3,13 @@
         <hamburger :is-active="sidebar.opened" :toggle-click="toggleSideBar" class="hamburger-container"/>
         <breadcrumb/>
         <el-dropdown class="avatar-container" trigger="click">
-            <div class="avatar-wrapper">
-                <img :src="avatar ? avatar : defaultAvatar + '?imageView2/1/w/80/h/80'" alt="头像" class="user-avatar">
-                <i class="el-icon-caret-bottom"></i>
-            </div>
+            <el-button circle icon="el-icon-caret-bottom" type="info"></el-button>
             <el-dropdown-menu class="user-dropdown" slot="dropdown">
                 <router-link class="inlineBlock" to="/">
-                    <el-dropdown-item>Home</el-dropdown-item>
+                    <el-dropdown-item>首页</el-dropdown-item>
                 </router-link>
                 <el-dropdown-item divided>
-                    <span @click="logout" style="display:block;">LogOut</span>
+                    <span @click="logout">退出登陆</span>
                 </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
@@ -23,22 +20,15 @@
     import {mapGetters} from 'vuex';
     import Breadcrumb from '@/components/Breadcrumb';
     import Hamburger from '@/components/Hamburger';
-    import defaultAvatar from '@/assets/default/avatar.gif'; //默认头像
 
     export default {
-        data() {
-            return {
-                defaultAvatar //配置默认头像
-            }
-        },
         components: {
             Breadcrumb,
             Hamburger
         },
         computed: {
             ...mapGetters([
-                'sidebar',
-                'avatar'
+                'sidebar'
             ])
         },
         methods: {
@@ -75,29 +65,9 @@
         }
 
         .avatar-container {
-            height: 50px;
             display: inline-block;
             position: absolute;
             right: 35px;
-
-            .avatar-wrapper {
-                cursor: pointer;
-                margin-top: 5px;
-                position: relative;
-
-                .user-avatar {
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 10px;
-                }
-
-                .el-icon-caret-bottom {
-                    position: absolute;
-                    right: -20px;
-                    top: 25px;
-                    font-size: 12px;
-                }
-            }
         }
     }
 </style>
