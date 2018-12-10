@@ -2,17 +2,26 @@
     <el-menu class="navbar" mode="horizontal">
         <hamburger :is-active="sidebar.opened" :toggle-click="toggleSideBar" class="hamburger-container"/>
         <breadcrumb/>
-        <el-dropdown class="avatar-container" trigger="click">
-            <el-button circle icon="el-icon-caret-bottom" type="info"></el-button>
-            <el-dropdown-menu class="user-dropdown" slot="dropdown">
-                <router-link class="inlineBlock" to="/">
-                    <el-dropdown-item>首页</el-dropdown-item>
-                </router-link>
-                <el-dropdown-item divided>
-                    <span @click="logout">退出登陆</span>
-                </el-dropdown-item>
-            </el-dropdown-menu>
-        </el-dropdown>
+
+        <div class="right-menu">
+            <template v-if="device !== 'mobile'">
+                <el-tooltip content="全屏" effect="dark" placement="bottom">
+                    <screenfull class="screenfull right-menu-item"/>
+                </el-tooltip>
+            </template>
+
+            <el-dropdown class="avatar-container right-menu-item" trigger="click">
+                <el-button circle icon="el-icon-caret-bottom" type="info"></el-button>
+                <el-dropdown-menu class="user-dropdown" slot="dropdown">
+                    <router-link class="inlineBlock" to="/">
+                        <el-dropdown-item>首页</el-dropdown-item>
+                    </router-link>
+                    <el-dropdown-item divided>
+                        <span @click="logout">退出登陆</span>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
     </el-menu>
 </template>
 
@@ -20,15 +29,18 @@
     import {mapGetters} from 'vuex';
     import Breadcrumb from '@/components/Breadcrumb';
     import Hamburger from '@/components/Hamburger';
+    import Screenfull from '@/components/Screenfull'
 
     export default {
         components: {
             Breadcrumb,
-            Hamburger
+            Hamburger,
+            Screenfull
         },
         computed: {
             ...mapGetters([
-                'sidebar'
+                'sidebar',
+                'device'
             ])
         },
         methods: {
@@ -49,25 +61,36 @@
         height: 50px;
         line-height: 50px;
         border-radius: 0 !important;
-
         .hamburger-container {
             line-height: 58px;
             height: 50px;
             float: left;
             padding: 0 10px;
         }
-
         .screenfull {
             position: absolute;
-            right: 90px;
+            right: 70px;
             top: 16px;
             color: red;
         }
-
+    }
+    .right-menu {
+        float: right;
+        height: 100%;
+        &:focus {
+            outline: none;
+        }
+        .right-menu-item {
+            display: inline-block;
+            margin: 0 8px;
+        }
+        .screenfull {
+            height: 20px;
+        }
         .avatar-container {
             display: inline-block;
             position: absolute;
-            right: 35px;
+            right: 10px;
         }
     }
 </style>
