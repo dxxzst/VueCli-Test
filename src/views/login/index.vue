@@ -98,7 +98,7 @@
             },
             handleLogin() {
                 //开发环境不显示
-                if (process.env.VUE_APP_ENVIRONMENT === 'DEVELOPMENT') {
+                if (process.env.VUE_APP_ENVIRONMENT === 'development') {
                     this.loginRequest();
                     return;
                 }
@@ -119,7 +119,7 @@
         },
         created: function () {
             //开发环境不显示
-            if (process.env.VUE_APP_ENVIRONMENT === 'PRODUCTION') {
+            if (process.env.VUE_APP_ENVIRONMENT === 'production') {
                 this.createScript(this.tCaptchaSrc);
             }
         }
